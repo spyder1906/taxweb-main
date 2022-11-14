@@ -1,7 +1,7 @@
 import React from 'react'
 import Grid from '@mui/material/Grid'
 import { useNavigate } from 'react-router-dom'
-import { logOut } from '../redux/actions'
+import { logOut, logoutAdminUser } from '../redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAuthToken } from './utils'
 
@@ -12,6 +12,8 @@ function Navbar() {
     navigate(route)
   }
   let user = useSelector((state) => state.user)
+  let adminUser = useSelector((state) => state.adminUser)
+
   const dispatch = useDispatch()
 
   return (
@@ -40,17 +42,18 @@ function Navbar() {
           xs={6}
           style={{ cursor: 'pointer' }}
           onClick={() => {
-            if (user) {
+            if (user || adminUser) {
               localStorage.removeItem('jwtToken')
               // Remove auth header for future requests
               setAuthToken(false)
               dispatch(logOut())
+              dispatch(logoutAdminUser())
             }
             goToTheRoute('/login')
           }}
         >
           <h4>
-            <p>{!user ? 'Login' : 'Log out'}</p>
+            <p>{!user && !adminUser ? 'Login' : 'Log out'}</p>
           </h4>
         </Grid>
         {!user ? (

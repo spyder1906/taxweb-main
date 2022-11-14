@@ -13,6 +13,8 @@ import UsersList from './components/staff/UsersList'
 import User from './components/staff/User'
 import store from './redux/store'
 import { Navigate } from 'react-router-dom'
+import AdminRegister from './components/admin/Register'
+import AdminLogin from './components/admin/Login'
 
 const theme = createTheme({
   palette: {
@@ -27,18 +29,22 @@ const theme = createTheme({
 
 function App() {
   let user = useSelector((state) => state.user)
+  let adminUser = useSelector((state) => state.adminUser)
+
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route exact path='/' element={user ? <Navigate to='/dashboard' /> : <Login />} />
-        <Route exact path='/dashboard' element={user ? <Dashboard /> : <Login />} />
-        <Route exact path='/login' element={user ? <Navigate to='/dashboard' /> : <Login />} />
-        <Route exact path='/register' element={user ? <Dashboard /> : <Register />} />
-        <Route exact path='/transactions' element={user ? <TransactionsList /> : <Login />} />
-        <Route exact path='/transactions/sales' element={user ? <TransactionsSalesList /> : <Login />} />
-        <Route exact path='/users' element={user ? <UsersList /> : <Login />} />
-        <Route exact path='/users/view/:userId' element={user ? <User /> : <Login />} />
+        <Route exact path='/' element={user || adminUser ? <Navigate to='/dashboard' /> : <Login />} />
+        <Route exact path='/dashboard' element={user || adminUser ? <Dashboard /> : <Login />} />
+        <Route exact path='/login' element={user || adminUser ? <Navigate to='/dashboard' /> : <Login />} />
+        <Route exact path='/register' element={user || adminUser ? <Dashboard /> : <Register />} />
+        <Route exact path='/transactions' element={user || adminUser ? <TransactionsList /> : <Login />} />
+        <Route exact path='/transactions/sales' element={user || adminUser ? <TransactionsSalesList /> : <Login />} />
+        <Route exact path='/users' element={user || adminUser ? <UsersList /> : <Login />} />
+        <Route exact path='/users/view/:userId' element={user || adminUser ? <User /> : <Login />} />
+        <Route exact path='/admin/login' element={<AdminLogin />} />
+        <Route exact path='/admin/register' element={<AdminRegister />} />
         {/* <Route exact path='/login' element={user ? <Dashboard /> : <Login />} />
         <Route exact path='/login' element={user ? <Dashboard /> : <Login />} />
         <Route exact path='/login' element={user ? <Dashboard /> : <Login />} /> */}

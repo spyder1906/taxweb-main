@@ -1,10 +1,10 @@
-import { REMOVEUSER, SETUSER } from './types'
+import { REMOVEUSER, SETUSER, SETADMINUSER, REMOVEADMINUSER } from './types'
 import jwt_decode from 'jwt-decode'
 
 let token = localStorage.jwtToken
 const initialState = {
   user: token ? jwt_decode(token) : null,
-  Adminuser: null
+  adminUser: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +19,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: null
+      }
+    case SETADMINUSER:
+      return {
+        ...state,
+        adminUser: payload
+      }
+    case REMOVEADMINUSER:
+      return {
+        ...state,
+        adminUser: null
       }
     default:
       return { ...state }

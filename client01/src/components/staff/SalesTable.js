@@ -2,9 +2,12 @@
 import React from 'react'
 import { Grid, Paper } from '@mui/material'
 import Loader from '../Loader'
+import { useSelector } from 'react-redux'
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
 export default function Table({ salesTransactions = [], userPage }) {
+  const adminUser = useSelector((state) => state?.adminUser)
+
   let credit = 0
   let debit = 0
   salesTransactions?.forEach((curr) => {
@@ -136,7 +139,7 @@ export default function Table({ salesTransactions = [], userPage }) {
               )
             })}
           </Grid>
-          {userPage && (
+          {adminUser?.role === 'admin' && (
             <Grid
               container
               justifyContent='center'

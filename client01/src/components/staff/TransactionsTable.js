@@ -2,8 +2,11 @@
 import React from 'react'
 import { Grid, Paper } from '@mui/material'
 import Loader from '../Loader'
+import { useSelector } from 'react-redux'
 
-export default function Table({ transactions = [], userPage }) {
+export default function Table({ transactions = [] }) {
+  const adminUser = useSelector((state) => state?.adminUser)
+
   let credit = 0
   let debit = 0
   transactions?.forEach((curr) => {
@@ -102,7 +105,7 @@ export default function Table({ transactions = [], userPage }) {
               )
             })}
           </Grid>
-          {userPage && (
+          {adminUser?.role === 'admin' && (
             <Grid
               container
               justifyContent='center'
