@@ -52,7 +52,6 @@ export default function Table({ transactions = [] }) {
           </Grid>
           <Grid container justifyContent='center' alignItems='center' style={{ textAlign: 'center' }}>
             {(transactions || []).map((t, i) => {
-              console.log(t, '====')
               return (
                 <>
                   <Grid
@@ -150,7 +149,9 @@ export default function Table({ transactions = [] }) {
                   xs={12}
                   style={{
                     lineHeight: '2.5rem',
-                    borderLeft: '2px solid rgb(255, 137, 130)'
+                    borderLeft: '2px solid rgb(255, 137, 130)',
+                    textAlign: 'right',
+                    marginRight: '17%'
                   }}
                 >
                   {Math.max(credit, debit) - Math.min(credit, debit)}

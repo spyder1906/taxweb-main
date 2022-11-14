@@ -184,7 +184,9 @@ export default function Table({ salesTransactions = [], userPage }) {
                   xs={12}
                   style={{
                     lineHeight: '2.5rem',
-                    borderLeft: '2px solid rgb(255, 137, 130)'
+                    borderLeft: '2px solid rgb(255, 137, 130)',
+                    textAlign: 'right',
+                    marginRight: '17%'
                   }}
                 >
                   {Math.max(credit, debit) - Math.min(credit, debit)}

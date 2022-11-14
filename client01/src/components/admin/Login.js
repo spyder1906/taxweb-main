@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import jwt_decode from 'jwt-decode'
-import classnames from 'classnames'
 import axios from 'axios'
 import { setAuthToken } from '../utils'
 import { setAdminUser } from '../../redux/actions'
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
+import { Grid } from '@mui/material'
+import Loader from '../Loader'
 
 function Login() {
   let [state, setState] = useState({
@@ -14,6 +17,7 @@ function Login() {
     password: '',
     errors: {}
   })
+  let [loading, setLoading] = useState(false)
 
   let navigate = useNavigate()
   const dispatch = useDispatch()
@@ -30,6 +34,7 @@ function Login() {
   }
 
   function onSubmit(e) {
+    setLoading(true)
     e.preventDefault()
     axios
       .post(process.env.REACT_APP_API_URL + '/api/admin/authenticate', state)
@@ -46,87 +51,62 @@ function Login() {
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => this.setState({ ...state, errors: { email: 'Invalid credentials' } }))
+    setLoading(false)
   }
 
   const { errors } = state
 
   return (
-    <div className='container'>
-      <div className='row'>
-        <div style={{ marginTop: '8rem' }} className='col s8 offset-s2'>
-          <Link to='/' className='btn-flat waves-effect'>
-            <i className='material-icons left'>keyboard_backspace</i> Back to home
-          </Link>
-          <div className='col s12' style={{ paddingLeft: '11.250px' }}>
-            <h4>
-              <b>Admin Login</b>
-            </h4>
-            <p className='grey-text text-darken-1'>{/* Don't have an account? <Link to="/register">Register</Link> */}</p>
-          </div>
-          <form noValidate onSubmit={onSubmit}>
-            <div className='input-field col s12'>
-              <input
-                onChange={onChange}
-                value={state.email}
-                id='email'
-                type='email'
-                className={classnames('', {
-                  invalid: errors?.email || errors?.emailnotfound
-                })}
-              />
-              <label htmlFor='email'>Email</label>
-              <span className='red-text'>
-                {errors?.email}
-                {errors?.emailnotfound}
-              </span>
-            </div>
-            <div className='input-field col s12'>
-              <input
-                onChange={onChange}
-                value={state.password}
-                id='password'
-                type='password'
-                className={classnames('', {
-                  invalid: errors?.password || errors?.passwordincorrect
-                })}
-              />
-              <label htmlFor='password'>Password</label>
-              <span className='red-text'>
-                {errors?.password}
-                {errors?.passwordincorrect}
-              </span>
-            </div>
-            <div className='col s12' style={{ paddingLeft: '11.250px' }}>
-              <button
-                style={{
-                  width: '150px',
-                  borderRadius: '3px',
-                  letterSpacing: '1.5px',
-                  marginTop: '1rem'
-                }}
-                onClick={onSubmit}
-                className='btn btn-large waves-effect waves-light hoverable blue accent-3'
-              >
-                Login
-              </button>
-              <button
-                style={{
-                  width: '150px',
-                  borderRadius: '3px',
-                  letterSpacing: '1.5px',
-                  marginTop: '1rem',
-                  marginLeft: '2rem'
-                }}
-                className='btn btn-large waves-effect waves-light hoverable blue accent-3'
+    <Grid container spacing={0} direction='column' alignItems='center' justifyContent='center' style={{ minHeight: '60vh' }}>
+      <Grid>
+        <div className='col s12' style={{ paddingLeft: '11.250px' }}>
+          <h2>
+            <b>Admin Login</b>
+          </h2>
+          <p className='grey-text text-darken-1'>{/* Don't have an account? <Link to="/register">Register</Link> */}</p>
+        </div>
+        <form noValidate onSubmit={onSubmit}>
+          <TextField
+            fullWidth
+            id='email'
+            name='email'
+            label='Email'
+            value={state.email}
+            onChange={onChange}
+            error={errors?.email && errors?.emailnotfound}
+            style={{ marginBottom: '0.3rem' }}
+          />
+          <TextField
+            fullWidth
+            id='password'
+            name='password'
+            label='Password'
+            type='password'
+            value={state.password}
+            onChange={onChange}
+            error={errors?.password && errors?.passwordincorrect}
+            style={{ marginBottom: '0.3rem' }}
+          />
+          {loading ? (
+            <Loader count={2} />
+          ) : (
+            <div className='col s12' style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+              <Button style={{ background: '#b92b27', width: '150px' }} color='secondary' variant='contained' type='submit'>
+                Submit
+              </Button>
+              <Button
+                style={{ background: '#b92b27', width: '150px', marginLeft: '2rem' }}
+                color='secondary'
+                variant='contained'
                 onClick={() => goToTheRoute('/admin/register')}
               >
                 Register
-              </button>
+              </Button>
             </div>
-          </form>
-        </div>
-      </div>
-    </div>
+          )}
+        </form>
+      </Grid>
+    </Grid>
   )
 }
 
