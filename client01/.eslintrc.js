@@ -33,7 +33,13 @@ module.exports = {
         message: 'Unexpected property on console object was called'
       }
     ],
-    'prettier/prettier': ['error', { singleQuote: true }],
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        endOfLine: 'auto'
+      }
+    ],
     quotes: ['error', 'single', { avoidEscape: true }]
   }
 }
