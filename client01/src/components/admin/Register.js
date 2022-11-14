@@ -8,31 +8,9 @@ import axios from 'axios'
 import Loader from '../Loader'
 import { useNavigate } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core'
-// import { useSelector } from 'react-redux'
-
-const useStyles = makeStyles({
-  underline: {
-    '&&&:before': {
-      borderBottom: 'none'
-    },
-    '&&:after': {
-      borderBottom: 'none'
-    }
-  }
-})
-
 export default function WithMaterialUI() {
   let [loading, setLoading] = useState(false)
   let navigate = useNavigate()
-  const classes = useStyles()
-  // const { user } = useSelector((state) => state.auth)
-
-  // function goToTheRoute(route) {
-  //   navigate(route)
-  // }
-
-  // if (user?.role === 'admin') goToTheRoute('/admin/dashboard')
 
   function onSubmit(values) {
     setLoading(true)
@@ -80,7 +58,6 @@ export default function WithMaterialUI() {
         </Grid>
         <form onSubmit={formik.handleSubmit}>
           <TextField
-            InputProps={{ classes }}
             fullWidth
             id='name'
             name='name'
@@ -92,7 +69,6 @@ export default function WithMaterialUI() {
             style={{ marginBottom: '0.3rem' }}
           />
           <TextField
-            InputProps={{ classes }}
             fullWidth
             id='email'
             name='email'
@@ -104,7 +80,6 @@ export default function WithMaterialUI() {
             style={{ marginBottom: '0.3rem' }}
           />
           <TextField
-            InputProps={{ classes }}
             fullWidth
             id='password'
             name='password'
@@ -117,7 +92,6 @@ export default function WithMaterialUI() {
             style={{ marginBottom: '0.3rem' }}
           />
           <TextField
-            InputProps={{ classes }}
             fullWidth
             id='password2'
             name='password2'
