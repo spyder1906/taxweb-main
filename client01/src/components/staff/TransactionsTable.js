@@ -3,8 +3,9 @@ import React from 'react'
 import { Grid, Paper } from '@mui/material'
 import Loader from '../Loader'
 import { useSelector } from 'react-redux'
+import Checkbox from '@mui/material/Checkbox'
 
-export default function Table({ transactions = [] }) {
+export default function Table({ transactions = [], selectedDate, setDateDelete, dateDelete }) {
   const adminUser = useSelector((state) => state?.user)
 
   let credit = 0
@@ -15,6 +16,14 @@ export default function Table({ transactions = [] }) {
     if (curr.finalAmount && curr.finalType === 'debit') debit = debit + curr.finalAmount
     if (curr.finalAmount && curr.finalType === 'credit') credit = credit + curr.finalAmount
   })
+
+  const handleDelete = (id) => {
+    if (dateDelete.includes(id)) {
+      setDateDelete((prev) => prev.filter((_id) => _id !== id))
+    } else {
+      setDateDelete((prev) => [...prev, id])
+    }
+  }
   return (
     <Paper elevation={4}>
       {transactions?.length ? (
@@ -64,6 +73,9 @@ export default function Table({ transactions = [] }) {
                     }}
                     title={new Date(t.Date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                   >
+                    {selectedDate[0] && selectedDate[1] && (
+                      <Checkbox sx={{ left: '-130px' }} checked={false} onClick={() => handleDelete(t._id)} />
+                    )}
                     {new Date(t.Date).toDateString()}
                   </Grid>
                   <Grid

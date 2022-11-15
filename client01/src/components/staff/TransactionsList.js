@@ -15,6 +15,7 @@ const apiURL = process.env.REACT_APP_API_URL
 export default function TransactionsList() {
   const [add, setAdd] = useState(false)
   const [transactions, setTransactions] = useState(null)
+  const [dateDelete, setDateDelete] = useState([])
   const [selectedDate, handleDateChange] = React.useState([null, null])
   let navigate = useNavigate()
   const adminUser = useSelector((state) => state?.user)
@@ -29,10 +30,11 @@ export default function TransactionsList() {
   }, [add])
 
   const filterDateData = useMemo(() => {
+    let tempDetele = []
     if (selectedDate[0] === null && selectedDate[1] === null) {
-      return transactions
+      tempDetele = transactions
     } else {
-      return transactions?.filter((a) => {
+      tempDetele = transactions?.filter((a) => {
         return (
           new Date(a.Date).getDate() >= new Date(selectedDate[0]).getDate() &&
           new Date(a.Date).getDate() <= new Date(selectedDate[1]).getDate() &&
@@ -43,7 +45,13 @@ export default function TransactionsList() {
         )
       })
     }
-  }, [transactions, selectedDate])
+    if (dateDelete.length) {
+      tempDetele = tempDetele.filter((x) => {
+        return !dateDelete.includes(x._id)
+      })
+    }
+    return tempDetele
+  }, [transactions, selectedDate, dateDelete])
 
   return (
     <>
@@ -86,7 +94,12 @@ export default function TransactionsList() {
             </Grid>
           </Paper>
           <Grid>
-            <TransactionTable transactions={filterDateData} />
+            <TransactionTable
+              transactions={filterDateData}
+              selectedDate={selectedDate}
+              setDateDelete={setDateDelete}
+              dateDelete={dateDelete}
+            />
           </Grid>
           <Modal
             isOpen={add}
