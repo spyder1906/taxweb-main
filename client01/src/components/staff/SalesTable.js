@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
 export default function Table({ salesTransactions = [], userPage }) {
-  const adminUser = useSelector((state) => state?.adminUser)
+  const adminUser = useSelector((state) => state?.user)
 
   let credit = 0
   let debit = 0

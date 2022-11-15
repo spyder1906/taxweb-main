@@ -17,7 +17,7 @@ export default function SaleTransactionsList() {
   const [transactions, setTransactions] = useState(null)
   const [selectedDate, handleDateChange] = React.useState([null, null])
   let navigate = useNavigate()
-  const adminUser = useSelector((state) => state?.adminUser)
+  const adminUser = useSelector((state) => state?.user)
 
   function goToTheRoute(route) {
     navigate(route)

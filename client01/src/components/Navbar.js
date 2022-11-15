@@ -1,7 +1,7 @@
 import React from 'react'
 import Grid from '@mui/material/Grid'
 import { useNavigate } from 'react-router-dom'
-import { logOut, logoutAdminUser } from '../redux/actions'
+import { logOut } from '../redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAuthToken } from './utils'
 
@@ -47,7 +47,6 @@ function Navbar() {
               // Remove auth header for future requests
               setAuthToken(false)
               dispatch(logOut())
-              dispatch(logoutAdminUser())
             }
             goToTheRoute('/login')
           }}

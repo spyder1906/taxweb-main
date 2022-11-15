@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import { setAuthToken } from '../utils'
-import { setAdminUser } from '../../redux/actions'
+import { setUser } from '../../redux/actions'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { Grid } from '@mui/material'
@@ -22,7 +22,7 @@ function Login() {
   let navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const user = useSelector((state) => state?.adminUser)
+  const user = useSelector((state) => state?.user)
   function goToTheRoute(route) {
     navigate(route)
   }
@@ -45,7 +45,7 @@ function Login() {
         setAuthToken(token, true)
         const decoded = jwt_decode(token)
         localStorage.setItem('jwtToken', token)
-        dispatch(setAdminUser(decoded))
+        dispatch(setUser(decoded))
         if (decoded.role !== 'admin') this.setState({ ...state, errors: { email: 'You are not a admin' } })
         else goToTheRoute('/dashboard')
       })

@@ -5,7 +5,7 @@ import Loader from '../Loader'
 import { useSelector } from 'react-redux'
 
 export default function Table({ transactions = [] }) {
-  const adminUser = useSelector((state) => state?.adminUser)
+  const adminUser = useSelector((state) => state?.user)
 
   let credit = 0
   let debit = 0

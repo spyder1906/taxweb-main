@@ -1,4 +1,2 @@
 export const SETUSER = 'SETUSER'
 export const REMOVEUSER = 'REMOVEUSER'
-export const SETADMINUSER = 'SETADMINUSER'
-export const REMOVEADMINUSER = 'REMOVEADMINUSER'
