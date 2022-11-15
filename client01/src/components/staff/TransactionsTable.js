@@ -162,8 +162,9 @@ export default function Table({ transactions = [], selectedDate, setDateDelete, 
                   style={{
                     lineHeight: '2.5rem',
                     borderLeft: '2px solid rgb(255, 137, 130)',
-                    textAlign: 'right',
-                    marginRight: '17%'
+                    textAlign: `${credit > debit ? 'left' : 'right'}`,
+                    marginRight: `${credit > debit ? '0' : '19%'}`,
+                    paddingLeft: `${credit > debit ? '19%' : '0'}`
                   }}
                 >
                   {Math.max(credit, debit) - Math.min(credit, debit)}
