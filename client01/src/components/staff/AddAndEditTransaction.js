@@ -35,16 +35,16 @@ export default function AddAndEdit({ onClose }) {
 
   const operators = {
     '+': function (a, b) {
-      return parseInt(a) + parseInt(b)
+      return parseFloat(a) + parseFloat(b)
     },
     x: function (a, b) {
-      return parseInt(a) * parseInt(b)
+      return parseFloat(a) * parseFloat(b)
     },
     '-': function (a, b) {
-      return parseInt(a) - parseInt(b)
+      return parseFloat(a) - parseFloat(b)
     },
     '/': function (a, b) {
-      return parseInt(a) / parseInt(b)
+      return parseFloat(a) / parseFloat(b)
     }
   }
 

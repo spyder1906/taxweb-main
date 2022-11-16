@@ -163,11 +163,11 @@ export default function Table({ transactions = [], selectedDate, setDateDelete, 
                     lineHeight: '2.5rem',
                     borderLeft: '2px solid rgb(255, 137, 130)',
                     textAlign: `${credit > debit ? 'left' : 'right'}`,
-                    marginRight: `${credit > debit ? '0' : '19%'}`,
-                    paddingLeft: `${credit > debit ? '19%' : '0'}`
+                    marginRight: `${credit > debit ? '0' : '17%'}`,
+                    paddingLeft: `${credit > debit ? '17%' : '0'}`
                   }}
                 >
-                  {Math.max(credit, debit) - Math.min(credit, debit)}
+                  {(Math.max(credit, debit) - Math.min(credit, debit)).toFixed(2)}
                 </Grid>
               </Grid>
             </Grid>
