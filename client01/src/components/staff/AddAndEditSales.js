@@ -145,7 +145,7 @@ export default function AddAndEdit({ onClose }) {
 
                       return (
                         <Grid container key={index} spacing={2} alignItems='basline'>
-                          <Grid item lg={2} sm={12} md={12}>
+                          <Grid item lg={2} sm={12} md={12} xs={8}>
                             <TextField
                               fullWidth
                               margin='normal'
@@ -162,7 +162,7 @@ export default function AddAndEdit({ onClose }) {
                               size='small'
                             />
                           </Grid>
-                          <Grid item lg={3} sm={12} md={12}>
+                          <Grid item lg={3} sm={12} md={12} xs={6}>
                             <TextField
                               id='outlined-select-currency'
                               select
@@ -186,7 +186,7 @@ export default function AddAndEdit({ onClose }) {
                               ))}
                             </TextField>
                           </Grid>
-                          <Grid item lg={2} sm={12} md={12}>
+                          <Grid item lg={2} sm={12} md={12} xs={6}>
                             <TextField
                               id='outlined-select-currency'
                               select
@@ -210,7 +210,7 @@ export default function AddAndEdit({ onClose }) {
                               ))}
                             </TextField>
                           </Grid>
-                          <Grid item lg={2} sm={12} md={12}>
+                          <Grid item lg={2} sm={12} md={12} xs={8}>
                             <TextField
                               fullWidth
                               margin='normal'
@@ -230,7 +230,7 @@ export default function AddAndEdit({ onClose }) {
                               size='small'
                             />
                           </Grid>
-                          <Grid item lg={1} sm={12} md={12}>
+                          <Grid item lg={1} sm={12} md={12} xs={4}>
                             <TextField
                               id='outlined-select-currency'
                               select

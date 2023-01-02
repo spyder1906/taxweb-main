@@ -25,7 +25,8 @@ function Navbar() {
         top: 0,
         marginBottom: '1rem',
         color: 'white',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: '0 10px'
       }}
       container
       justifyContent='space-evenly'

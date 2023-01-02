@@ -189,7 +189,7 @@ export default function AddAndEdit({ onClose }) {
 
                       return (
                         <Grid container key={index} spacing={2} alignItems='basline'>
-                          <Grid item lg={2} sm={12} md={12}>
+                          <Grid item lg={2} sm={12} md={12} xs={7}>
                             <TextField
                               fullWidth
                               margin='normal'
@@ -206,7 +206,7 @@ export default function AddAndEdit({ onClose }) {
                               size='small'
                             />
                           </Grid>
-                          <Grid item lg={3} sm={12} md={12}>
+                          <Grid item lg={3} sm={12} md={12} xs={5}>
                             <TextField
                               id='outlined-select-currency'
                               select
