@@ -11,7 +11,7 @@ export default function UsersList() {
   }
 
   return (
-    <Grid style={{ paddingLeft: '15%', paddingRight: '15%' }}>
+    <Grid style={{ padding: '5% 15%' }}>
       <Paper elevation={4}>
         <Grid container justifyContent='center' alignItems='center'>
           <Grid item xs={12}>
@@ -19,7 +19,15 @@ export default function UsersList() {
               Dashboard for staff/Admin
             </Typography>
           </Grid>
-          <Grid item xs={12} container justifyContent='center' style={{ textAlign: 'center', margin: '20px' }}>
+          <Grid
+            item
+            xs={12}
+            container
+            justifyContent='center'
+            style={{ textAlign: 'center', margin: '20px' }}
+            columns={{ xs: 4, sm: 12, md: 12 }}
+            rowGap={2}
+          >
             <Grid item xs={4}>
               {' '}
               <Button color='primary' variant='contained' style={{ textDecoration: 'none' }} onClick={() => goToTheRoute('/transactions')}>

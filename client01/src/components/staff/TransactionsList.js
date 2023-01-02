@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react'
+import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
@@ -10,6 +11,21 @@ import Modal from '../Modal'
 import TransactionTable from './TransactionsTable'
 import AddAndEditTransaction from './AddAndEditTransaction'
 const apiURL = process.env.REACT_APP_API_URL
+
+const TransactionsListWrapper = styled('div')`
+  .transactions-part {
+    padding: 0 10px;
+  }
+  @media (max-width: 575px) {
+    .transactions-part {
+      display: block;
+      padding: 20px 0;
+    }
+    .transaction-table {
+      margin: 0 !important;
+    }
+  }
+`
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
 export default function TransactionsList() {
@@ -54,7 +70,7 @@ export default function TransactionsList() {
   }, [transactions, selectedDate, dateDelete])
 
   return (
-    <>
+    <TransactionsListWrapper>
       {adminUser?.role === 'admin' && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <LocalizationProvider dateAdapter={DateFnsUtils}>
@@ -75,9 +91,9 @@ export default function TransactionsList() {
         </div>
       )}
       <Grid style={{ padding: '5%' }}>
-        <Grid style={{ marginRight: '10%', marginLeft: '10%', border: '2px solid #b92b27' }}>
+        <Grid style={{ marginRight: '10%', marginLeft: '10%', border: '2px solid #b92b27' }} className='transaction-table'>
           <Paper elevation={6}>
-            <Grid container justifyContent='center' alignItems='center'>
+            <Grid container justifyContent='center' alignItems='center' className='transactions-part'>
               <Grid item md={4} sm={4} lg={2} style={{ textAlign: 'center', fontFamily: 'system-ui' }}>
                 <Button variant='contained' size='small' onClick={() => goToTheRoute('/dashboard')}>
                   Go To Dashboard
@@ -86,7 +102,7 @@ export default function TransactionsList() {
               <Grid item md={4} sm={4} lg={8} style={{ textAlign: 'center', fontFamily: 'system-ui' }}>
                 <h2>Transactions for Amount & Commision</h2>
               </Grid>
-              <Grid item md={4} sm={4} lg={2}>
+              <Grid item md={4} sm={4} lg={2} style={{ textAlign: 'center' }}>
                 <Button variant='contained' size='small' onClick={() => setAdd(true)}>
                   Add Transaction
                 </Button>
@@ -115,6 +131,6 @@ export default function TransactionsList() {
           </Modal>
         </Grid>
       </Grid>
-    </>
+    </TransactionsListWrapper>
   )
 }

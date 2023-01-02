@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useMemo, useState, useEffect } from 'react'
+import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
@@ -11,6 +12,18 @@ import AddAndEditSales from './AddAndEditSales'
 import Modal from '../Modal'
 import SalesTable from './SalesTable'
 const apiURL = process.env.REACT_APP_API_URL
+
+const TransactionsSalesListWrapper = styled('div')`
+  @media (max-width: 575px) {
+    .transactions-sales-part {
+      display: block;
+      padding: 20px 0;
+    }
+    .sales-table {
+      margin: 0 !important;
+    }
+  }
+`
 
 export default function SaleTransactionsList() {
   const [add, setAdd] = useState(false)
@@ -46,7 +59,7 @@ export default function SaleTransactionsList() {
   }, [transactions, selectedDate])
 
   return (
-    <>
+    <TransactionsSalesListWrapper>
       {adminUser?.role === 'admin' && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <LocalizationProvider dateAdapter={DateFnsUtils}>
@@ -67,9 +80,9 @@ export default function SaleTransactionsList() {
         </div>
       )}
       <Grid style={{ padding: '5%' }}>
-        <Grid style={{ marginRight: '10%', marginLeft: '10%', border: '2px solid rgb(255, 137, 130)' }}>
+        <Grid style={{ marginRight: '10%', marginLeft: '10%', border: '2px solid rgb(255, 137, 130)' }} className='sales-table'>
           <Paper elevation={6}>
-            <Grid container justifyContent='center' alignItems='center'>
+            <Grid container justifyContent='center' alignItems='center' className='transactions-sales-part'>
               <Grid item md={4} sm={4} lg={2} style={{ textAlign: 'center', fontFamily: 'system-ui' }}>
                 <Button variant='contained' size='small' onClick={() => goToTheRoute('/dashboard')}>
                   Go To Dashboard
@@ -78,7 +91,7 @@ export default function SaleTransactionsList() {
               <Grid item md={4} sm={4} lg={8} style={{ textAlign: 'center', fontFamily: 'system-ui' }}>
                 <h2>Transactions for Sale & Purchase</h2>
               </Grid>
-              <Grid item md={4} sm={4} lg={2}>
+              <Grid item md={4} sm={4} lg={2} style={{ textAlign: 'center' }}>
                 <Button variant='contained' size='small' onClick={() => setAdd(true)}>
                   Add Transaction
                 </Button>
@@ -102,6 +115,6 @@ export default function SaleTransactionsList() {
           </Modal>
         </Grid>
       </Grid>
-    </>
+    </TransactionsSalesListWrapper>
   )
 }

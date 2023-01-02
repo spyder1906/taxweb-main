@@ -24,7 +24,8 @@ function Navbar() {
         position: 'sticky',
         top: 0,
         marginBottom: '1rem',
-        color: 'white'
+        color: 'white',
+        alignItems: 'center'
       }}
       container
       justifyContent='space-evenly'

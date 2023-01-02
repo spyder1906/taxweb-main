@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import { Grid, Paper } from '@mui/material'
 import { useEffect } from 'react'
 import axios from 'axios'
@@ -6,6 +7,20 @@ const apiURL = process.env.REACT_APP_API_URL
 import { useParams } from 'react-router-dom'
 import Loader from '../Loader'
 import SalesTable from './SalesTable'
+
+const UserWrapper = styled('div')`
+  @media (max-width: 575px) {
+    .user-info {
+      margin: 4% !important;
+    }
+    .mb-paper {
+      padding: 3% !important;
+    }
+    .mb-size {
+      margin: 0 !important;
+    }
+  }
+`
 
 export default function UsersList() {
   const [user, setUser] = useState(null)
@@ -25,25 +40,27 @@ export default function UsersList() {
     })
   }, [])
   return (
-    <Grid style={{ marginLeft: '15%', marginRight: '15%' }}>
-      {!loading ? (
-        <Paper elevation={4} style={{ padding: '1%' }}>
-          <Grid style={{ textAlign: 'center' }}>
-            <div style={{ margin: '1rem' }}>
-              <b>User: {user.name}</b>
-            </div>
-          </Grid>
-          <Grid style={{}}>
-            <Grid style={{ marginRight: '2%', marginLeft: '2%', border: '2px solid #b92b27' }}>
-              <Grid>
-                <SalesTable salesTransactions={transactions} userPage />
+    <UserWrapper>
+      <Grid style={{ marginLeft: '15%', marginRight: '15%' }} className='user-info'>
+        {!loading ? (
+          <Paper elevation={4} style={{ padding: '1%' }} className='mb-paper'>
+            <Grid style={{ textAlign: 'center' }}>
+              <div style={{ margin: '1rem' }}>
+                <b>User: {user.name}</b>
+              </div>
+            </Grid>
+            <Grid style={{}}>
+              <Grid style={{ marginRight: '2%', marginLeft: '2%', border: '2px solid #b92b27' }} className='mb-size'>
+                <Grid>
+                  <SalesTable salesTransactions={transactions} userPage />
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-      ) : (
-        <Loader />
-      )}
-    </Grid>
+          </Paper>
+        ) : (
+          <Loader />
+        )}
+      </Grid>
+    </UserWrapper>
   )
 }
